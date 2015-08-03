@@ -1,0 +1,12 @@
+#!/bin/bash
+# run commands every day
+# Mendez 2015.08
+
+HOST="$(hostname -s)"
+OUTDIR="$HOME/data/temporal/$(date '+%Y.%m')"
+SUFFIX="$HOST.log"
+
+if [ ! -d "$OUTDIR" ]; do
+    mkdir -p $OUTDIR
+fi
+

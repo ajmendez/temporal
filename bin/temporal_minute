@@ -1,0 +1,18 @@
+#!/bin/bash
+# run commands every minute
+# Mendez 2015.08
+
+
+HOST="$(hostname -s)"
+OUTDIR="$HOME/data/temporal/$(date '+%Y.%m')"
+PREFIX="$(date '+%s') | $(date) | "
+SUFFIX="$HOST.log"
+
+if [ ! -d "$OUTDIR" ]; do
+    mkdir -p $OUTDIR
+fi
+
+
+echo "$PREFIX $(uptime)" >> "$OUTDIR/uptime.$SUFFIX"
+echo "$PREFIX $(/usr/local/bin/osx-cpu-temp)" >> "$OUTDIR/temperature.$SUFIX"
+echo "$PREFIX $(/usr/sbin/ioreg -l | egrep 'CycleCount|Capacity' | sed -n -e 'H;${x;s/\n/;;/g;s/^,//;p;}')" >> $OUTDIR/.battery.$SUFFIX

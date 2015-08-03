@@ -1,0 +1,15 @@
+#!/bin/bash
+# run commands every hour
+# Mendez 2015.08
+
+HOST="$(hostname -s)"
+OUTDIR="$HOME/data/temporal/$(date '+%Y.%m')"
+SUFFIX="$HOST.log"
+
+if [ ! -d "$OUTDIR" ]; do
+    mkdir -p $OUTDIR
+fi
+
+
+echo "$PREFIX $(/usr/sbin/netstat -ib | sed -n -e 'H;${x;s/\n/;;/g;s/^,//;p;}')" >> $OUTDIR/.network.$SUFFIX
+
